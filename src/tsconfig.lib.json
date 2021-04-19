@@ -1,0 +1,42 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../out-tsc/lib",
+		"target": "es5",
+		"module": "es2015",
+		"moduleResolution": "node",
+		"declaration": true,
+		"sourceMap": true,
+		"inlineSources": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"types": [],
+		"lib": [
+			"dom",
+			"es2018"
+		],
+		"paths": {
+			"jszip": [
+				"../node_modules/jszip/dist/jszip.min.js"
+			],
+			"@angular/*": [
+				"./node_modules/@angular/*"
+			]
+		},
+		"baseUrl": "./"
+	},
+	"angularCompilerOptions": {
+		"annotateForClosureCompiler": true,
+		"skipTemplateCodegen": false,
+		"strictMetadataEmit": true,
+		"fullTemplateTypeCheck": true,
+		"strictInjectionParameters": true,
+		"enableResourceInlining": true,
+		"enableIvy": true // see hack in src/package.json (https://github.com/ng-packagr/ng-packagr/issues/1467)
+	},
+	"exclude": [
+		"src/test.ts",
+		"**/*.spec.ts"
+	]
+}

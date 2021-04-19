@@ -1,0 +1,7 @@
+<div *ngIf="error">
+	<div class="content">
+		<div class="title">{{ error.title }}</div>
+
+		<p [innerHtml]="error.message"></p>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<div class="layout layout-left-content" (window:resize)="onResize()">
+	<span
+		(click)="toggleStatus()"
+		class="btn icon"
+		[ngClass]="{'icon--greater facette-header': collapsed, 'icon--less facette-header': !collapsed}"
+		aria-label="Seitennavigation einklappen"
+	>
+	</span>
+	<div class="layout-row">
+		<div *ngIf="!collapsed" class="left">
+			<ng-content select="[left]"></ng-content>
+		</div>
+		<div class="content">
+			<ng-content select="[content]"></ng-content>
+		</div>
+	</div>
+</div>

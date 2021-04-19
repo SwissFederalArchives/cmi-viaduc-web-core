@@ -1,0 +1,11 @@
+<div class="progress">
+	<div class="progress-bar viaduc"
+		 role="progressbar"
+		 [attr.aria-valuenow]="percentage"
+		 [attr.aria-valuetext]="percentage + '%'"
+		 aria-valuemin="0"
+		 aria-valuemax="100"
+		 [ngStyle]="{width: (percentage < 100 ? percentage : 100) + '%'}">
+		{{ percentage + '%'}}
+	</div>
+</div>

@@ -1,0 +1,57 @@
+@import "../../../styles/variables.less";
+
+cmi-spinner,
+.cmi-spinner {
+	&.cmi-visible {
+		opacity: 1;
+	}
+
+	.cmi-hint {
+		text-align: center;
+		margin: 10px 10px 0 10px;
+	}
+
+	.cmi-three-dots {
+		padding: 10px 20px;
+		background-color: @color-white;
+		display: flex;
+		width: 100px;
+		margin: 0 auto;
+		justify-content: space-between;
+		align-items: center;
+
+		span {
+			width: 10px;
+			height: 10px;
+			background: @color-typo;
+			opacity: 0.2;
+
+			&:nth-child(1) {
+				animation: lightUp 1.5s linear infinite;
+			}
+
+			&:nth-child(2) {
+				animation: lightUp 1.5s linear infinite 0.5s;
+			}
+
+			&:nth-child(3) {
+				animation: lightUp 1.5s linear infinite 1s;
+			}
+		}
+	}
+}
+
+@keyframes lightUp {
+	0% {
+		opacity: 0.2;
+	}
+	40% {
+		opacity: 1;
+	}
+	60% {
+		opacity: 0.2;
+	}
+	100% {
+		opacity: 0.2;
+	}
+}

@@ -1,0 +1,61 @@
+<nav class="pagination-container clearfix">
+	<span class="pull-left">{{'Anzahl: ' | translate:'oDataPagination.count'}} {{ collectionView.itemCount + (collectionView.pageSize * collectionView.pageIndex) }} / {{collectionView.totalItemCount}}</span>
+
+	<ul class="pull-right pagination">
+		<li [ngClass]="collectionView.pageIndex === 0 ? 'separator disabled' : 'separator'">
+			<a href="javascript:void(0)"
+			   data-toggle="tooltip"
+			   tooltip="{{'Zur ersten Seite' | translate: 'oDataPagination.backToStart'}}"
+			   [attr.aria-disabled]="collectionView.pageIndex === 0"
+			   (click)="collectionView.moveToFirstPage()">
+				<span class="icon icon--step-backward"></span>
+				<span class="sr-only">{{'Zur ersten Seite' | translate: 'oDataPagination.backToStart'}}</span>
+			</a>
+		</li>
+		<li [ngClass]="collectionView.pageIndex === 0 ? 'separator disabled' : 'separator'">
+			<a [attr.aria-disabled]="collectionView.pageIndex === 0" href="javascript:void(0)" (click)="collectionView.moveToPreviousPage()">
+				{{'Vorherige' | translate: 'oDataPagination.previous'}}
+			</a>
+		</li>
+		<li *ngFor="let item of items" [ngClass]="item.index === collectionView.pageIndex ? 'active' : item.disabled ? 'disabled' : ''">
+			<a href="javascript:void(0)"
+			   (click)="setPageIndex(item.index)"
+			   [attr.aria-disabled]="item.disabled"
+			   tooltip="{{ 'Seite {0} anzeigen' | translate:'search.browser.pageTooltip':(item.index+1) }}">
+				{{	item.label	}}
+			</a>
+		</li>
+		<li [ngClass]="collectionView.pageIndex === collectionView.pageCount - 1 ? 'separator-left disabled' : 'separator-left'">
+			<a href="javascript:void(0)"
+			   [attr.aria-disabled]="collectionView.pageIndex === collectionView.pageCount - 1"
+			   (click)="collectionView.moveToNextPage()">
+				{{'Nächste' | translate: 'oDataPagination.next'}}
+			</a>
+		</li>
+		<li [ngClass]="collectionView.pageIndex === collectionView.pageCount - 1 ? 'separator-left disabled' : 'separator-left'">
+			<a href="javascript:void(0)"
+			   data-toggle="tooltip"
+			   tooltip="{{'Zur letzten Seite' | translate: 'oDataPagination.last'}}"
+			   [attr.aria-disabled]="collectionView.pageIndex === collectionView.pageCount - 1"
+			   (click)="collectionView.moveToLastPage()">
+				<span class="icon icon--step-forward"></span>
+				<span class="sr-only">{{'Zur letzten Seite' | translate: 'oDataPagination.last'}}</span>
+			</a>
+		</li>
+	</ul>
+
+	<span class="form-group inline pull-right">
+		<label class="inline"
+			   for="pagingSize">{{ 'Anz. Treffer pro Seite' | translate:'pagination.anzahlTreffer' }}</label>
+		&nbsp;
+		<select class="form-control inline nopad"
+				id="pagingSize"
+				[(ngModel)]="collectionView.pageSize"
+				(change)="onChangePageSize()">
+				<option *ngFor="let skip of possiblePagingSizes"
+						[ngValue]="skip"
+						[attr.selected]=" skip.toString() === collectionView.pageSize.toString() ? 'selected' : ''">{{skip}}</option>
+		</select>
+	</span>
+</nav>
+

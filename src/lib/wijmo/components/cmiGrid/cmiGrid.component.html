@@ -1,0 +1,21 @@
+<div>
+	<wj-flex-grid-filter #filter [defaultFilterType]="defaultFilterType" [showSortButtons]="false"></wj-flex-grid-filter>
+
+	<wj-flex-grid-column [isRequired]="true"
+						 [width]="50"
+						 *ngIf="displaySelectionColumn"
+						 [dataType]="3"
+						 [allowDragging]="false"
+						 [header]="' '" align="center">
+
+		<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+			<input type="checkbox" (click)="addOrRemoveItemFromSelection(item)" [checked]="currentSelection.has(item)">
+		</ng-template>
+
+	</wj-flex-grid-column>
+
+	<!-- Der Rest des Wijmo-Grids wird hier injected -->
+	<ng-content>
+
+	</ng-content>
+</div>

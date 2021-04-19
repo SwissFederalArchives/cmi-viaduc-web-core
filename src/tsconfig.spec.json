@@ -1,0 +1,31 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"outDir": "../out-tsc/spec",
+		"baseUrl": "./",
+		"module": "commonjs",
+		"target": "es5",
+		"types": [
+			"jasmine",
+			"node"
+		],
+		"paths": {
+			"jszip": [
+				"../node_modules/jszip/dist/jszip.min.js"
+			],
+			"@angular/*": [
+				"./node_modules/@angular/*"
+			]
+		}
+	},
+	"files": [
+		"test.ts",
+	  "polyfills.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ]
+}

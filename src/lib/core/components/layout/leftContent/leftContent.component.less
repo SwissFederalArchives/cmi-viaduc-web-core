@@ -1,0 +1,52 @@
+.layout {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.layout-row {
+	display: table-row;
+	width: 100%;
+}
+
+.layout-left-content > .layout-row > div {
+	padding: 0 0;
+	display: table-cell;
+	vertical-align: top;
+	position: relative;
+}
+
+.layout-left-content > .layout-row > .left {
+	width: 240px;
+}
+
+.layout-left-content > .layout-row > .content {
+	padding-left: 20px;
+}
+
+.layout-left-content .content .page-header {
+	margin-top: 0.75em;
+}
+.layout-left-content > .btn {
+	display: none;
+}
+
+@media (max-width: 992px) {
+	.layout-left-content > .layout-row > div {
+		padding: 0 0;
+		display: block;
+		vertical-align: top;
+		width: 100%;
+	}
+	.layout-left-content > .layout-row > .left {
+		width: 100%;
+	}
+	.layout-left-content > .layout-row > .content {
+		padding-left: 0;
+	}
+	.layout-left-content > .btn {
+		display: block;
+		margin:  10px 0 10px 0;
+		width: 35px;
+	}
+}

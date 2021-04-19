@@ -1,0 +1,41 @@
+.pagination-container {
+	.pagination {
+		> li:not(.disabled) > a {
+			cursor: pointer;
+		}
+		> li:not(.disabled) > a:hover {
+			background-color: #E5E5E5;
+			text-decoration: none;
+		}
+		> li > a,
+		> li > a:hover {
+			text-decoration: none;
+		}
+		> li.disabled > a {
+			color: #999;
+			cursor: default;
+		}
+		> li.disabled.active > a {
+			color: #000;
+		}
+	}
+	.form-group {
+		label, select {
+			display: inline;
+		}
+		select {
+			padding: 0;
+		}
+		:after,
+		:before {
+			display: inline;
+		}
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.pagination-container .pagination li:first-child,
+	.pagination-container .pagination li:last-child {
+		display: inherit;
+	}
+}

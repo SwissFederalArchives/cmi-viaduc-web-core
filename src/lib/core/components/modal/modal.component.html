@@ -1,0 +1,18 @@
+<div class="modal-backdrop in" (click)="closeModal($event)" [attr.aria-hidden]="!opened" [ngStyle]="{'display': display}"></div>
+<div class="modal" tabindex="-1" role="dialog" [attr.aria-label]="modalTitle" [attr.aria-hidden]="!opened" [ngStyle]="{'display': display}">
+	<div class="modal-dialog">
+		<div class="modal-content" #modalContent>
+			<!-- cmi-viaduc-modal-header -->
+			<div class="modal-header">
+				<button type="button" (click)="closeModal($event)" class="close icon icon--before icon--close" [attr.aria-hidden]="!opened">{{'Schliessen' | translate:'modal.close'}}</button>
+				<h3 class="modal-title">
+					{{ modalTitle }}
+				</h3>
+			</div>
+			<ng-content>
+				<!-- cmi-viaduc-modal-content -->
+				<!-- cmi-viaduc-modal-footer -->
+			</ng-content>
+		</div>
+	</div>
+</div>

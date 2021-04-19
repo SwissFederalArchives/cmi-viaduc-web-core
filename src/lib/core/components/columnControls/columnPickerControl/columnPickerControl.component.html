@@ -1,0 +1,36 @@
+<cmi-viaduc-modal [id]="controlId" [(opened)]="showColumnPickerModal" tooltip="{{'Spalten ein/ausblenden' | translate:'columnpicker.einAusblenden'}}">
+	<cmi-viaduc-modal-body>
+		<div class="tablerowcontainer">
+			<div class="left">
+				<strong>{{ 'Sichtbare Spalten' | translate:'columnpicker.visibleColumns' }}</strong>
+			</div>
+			<div class="middle">
+			</div>
+			<div class="right">
+				<strong>{{ 'Versteckte Spalten' | translate:'columnpicker.hiddenColumns' }}</strong>
+			</div>
+		</div>
+		<div class="tablerowcontainer">
+			<div class="left with-border">
+				<wj-list-box #listVisible [itemsSource]="visibleColumns" displayMemberPath="defaultLabel" [ngModel]="selectedVisible"></wj-list-box>
+			</div>
+			<div class="middle">
+				<button type="button" class="btn btn-default"
+						[disabled]="!listHidden || !listHidden.selectedItem"
+						(click)="onShowColumnClick($event, listHidden.selectedItem)">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+				</button>
+				<br/>
+				<br/>
+				<button type="button" class="btn btn-default"
+						[disabled]="!listVisible || !listVisible.selectedItem"
+						(click)="onHideColumnClick($event, listVisible.selectedItem)">
+					<i class="glyphicon glyphicon-chevron-right"></i>
+				</button>
+			</div>
+			<div class="right with-border">
+				<wj-list-box #listHidden [itemsSource]="hiddenColumns" displayMemberPath="defaultLabel" [ngModel]="selectedHidden"></wj-list-box>
+			</div>
+		</div>
+	</cmi-viaduc-modal-body>
+</cmi-viaduc-modal>
