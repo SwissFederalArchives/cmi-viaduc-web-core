@@ -8,7 +8,10 @@
 			true,
 			"check-space"
 		],
-		"curly": true,
+    "curly": true,
+    "deprecation": {
+      "severity": "warning"
+    },
 		"eofline": true,
 		"forin": true,
 		"indent": [
@@ -43,8 +46,7 @@
 		"no-string-literal": false,
 		"no-switch-case-fall-through": true,
 		"no-trailing-whitespace": false,
-		"no-unused-expression": true,
-		"no-use-before-declare": true,
+    "no-unused-expression": true,
 		"no-var-keyword": true,
 		"object-literal-sort-keys": false,
 		"one-line": [

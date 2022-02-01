@@ -24,26 +24,55 @@ export class EntityDecoratorService {
 		if (type) {
 			switch (type.toLowerCase()) {
 				case 'dossier':
+				case 'dossiers':
 					icon = 'glyphicon glyphicon-folder-open';
 					break;
 				case 'subdossier':
+				case 'sous-dossier':
+				case 'sezione di dossier':
+				case 'sub-dossiers':
 					icon = 'glyphicon glyphicon-folder-minus';
 					break;
 				case 'dokument':
+				case 'document':
+				case 'documento':
+				case 'documents':
 					icon = 'glyphicon glyphicon-article';
 					break;
 				case 'teilserie':
 				case 'serie':
+				case 'série':
+				case 'series':
 					icon = 'glyphicon glyphicon-sort';
 					break;
 				case 'teilbestand':
+				case 'sous-fonds':
+				case 'sezione di fondo':
+				case 'sub-fonds':
 					icon = 'glyphicon glyphicon-cube-empty';
 					break;
 				case 'hauptabteilung':
+				case 'division':
+				case 'sezione principale':
+				case 'main departments':
+
 				case 'beständeserie':
+				case 'série des fonds':
+				case 'serie di fondi':
+				case 'fonds series':
+
 				case 'akzession':
+				case 'versement':
+				case 'accessione':
+				case 'accessions':
+
 				case 'archiv':
+				case 'archives':
+				case 'archivio':
+
 				case 'bestand':
+				case 'fonds':
+				case 'fondo':
 					icon = 'glyphicon glyphicon-show-big-thumbnails';
 					break;
 				default:

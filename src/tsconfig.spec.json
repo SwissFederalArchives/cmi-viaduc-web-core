@@ -1,11 +1,10 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
-		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"outDir": "../out-tsc/spec",
 		"baseUrl": "./",
-		"module": "commonjs",
+		"module": "es2020",
 		"target": "es5",
 		"types": [
 			"jasmine",
@@ -22,10 +21,10 @@
 	},
 	"files": [
 		"test.ts",
-	  "polyfills.ts"
-  ],
-  "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts"
-  ]
+		"polyfills.ts"
+	],
+	"include": [
+		"**/*.spec.ts",
+		"**/*.d.ts"
+	]
 }

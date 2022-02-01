@@ -77,7 +77,7 @@ export class PreloadService {
 					resolve(translations);
 				});
 			} catch (ex) {
-				console.log('PreloadService._loadTranslations: failed to load inlined translations.', ex);
+				console.error('PreloadService._loadTranslations: failed to load inlined translations.', ex);
 			}
 		}
 
@@ -108,7 +108,7 @@ export class PreloadService {
 					resolve(settings);
 				});
 			} catch (ex) {
-				console.log('PreloadService._loadSettings: failed to load inlined translations.', ex);
+				console.error('PreloadService._loadSettings: failed to load inlined translations.', ex);
 			}
 		}
 
@@ -135,7 +135,7 @@ export class PreloadService {
 					resolve(modelData);
 				});
 			} catch (ex) {
-				console.log('PreloadService._loadModelData: failed to load inlined translations.', ex);
+				console.error('PreloadService._loadModelData: failed to load inlined translations.', ex);
 			}
 		}
 

@@ -9,5 +9,10 @@
 			"./lib/wijmo/styles"
 		]
 	},
+	"assets": [
+		"./lib/**/*.less",
+		"./lib/**/*.scss",
+		"./lib/**/*.css"
+	],
 	"keepLifecycleScripts": true
 }

@@ -75,7 +75,7 @@ describe('CmiGridComponent', () => {
 
 	it(`should have set the correct default values`, () => {
 		expect(grid.defaultSortColumnKey).toBeFalsy();
-		expect(grid.selectedItems.length).toBe(0);
+		expect(grid.checkedItems.length).toBe(0);
 		expect(grid.selectionMode).toBe(3);
 		expect(grid.filter.defaultFilterType).toBe(FilterType.Condition);
 	});
@@ -147,7 +147,7 @@ describe('CmiGridComponent', () => {
 			grid.refreshCells(true);
 			fixture.detectChanges();
 
-			let args = spy.calls.all().filter(c => c.args[0].indexOf('Sort') >= 0).map(c => c.args[1]);
+			let args = spy.calls.all().filter(c => (c.args[0] as string).indexOf('Sort') >= 0).map(c => c.args[1]);
 			let arg = args[0];
 			expect(arg).toBe( '[{"key":"Country","asc":true}]');
 		}));

@@ -2,13 +2,18 @@ import {readFileSync, writeFileSync} from 'fs';
 import {getProjectVersion} from './getProjectVersion';
 
 async function main() {
-	let version = await getProjectVersion();
-	if (process.argv.includes('--release')) {
-		version = version.split('-')[0];
-	}
+	getProjectVersion().then(version => {
 
-	setVersion('./src/package.json', version);
-	setVersion('./src/package-lock.json', version);
+		if (process.argv.includes('--release')) {
+			version = version.split('-')[0];
+		}
+
+		setVersion('./src/package.json', version);
+		setVersion('./src/package-lock.json', version);
+	})
+	.catch(e => {
+		console.error(e);
+	});
 }
 
 function setVersion(name: string, version: string) {

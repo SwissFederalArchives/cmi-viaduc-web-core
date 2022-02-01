@@ -12,6 +12,10 @@ import {ModalFooterComponent} from './modal/modalFooter/modalFooter';
 import {ODataPaginationComponent} from './odata/oDataPagination/oDataPagination.component';
 import {HighlightComponent} from './highlight/highlight.component';
 import {ColumnPickerControlComponent} from './columnControls/columnPickerControl/columnPickerControl.component';
+import {ModalContainerComponent} from './ui/dialog-service/modal/modal.container';
+import {ModalServiceComponent} from './ui/dialog-service/modal/modal.service.component';
+import {BasicModalComponent} from './ui/dialog-service/dialogs/basic.modal.component';
+import {ConfirmationModalComponent} from './ui/dialog-service/dialogs/confirmation.modal.component';
 
 export const ALL_COMPONENTS = [
 	LoaderComponent,
@@ -27,5 +31,9 @@ export const ALL_COMPONENTS = [
 	ModalFooterComponent,
 	ODataPaginationComponent,
 	HighlightComponent,
-	ColumnPickerControlComponent
+	ColumnPickerControlComponent,
+	ModalContainerComponent,
+	ModalServiceComponent,
+	BasicModalComponent,
+	ConfirmationModalComponent
 ];

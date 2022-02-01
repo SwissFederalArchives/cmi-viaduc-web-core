@@ -6,6 +6,7 @@ export {UiService} from './ui.service';
 export {ConfigService} from './config.service';
 export {ArchiveModel} from './archiveModel';
 export {CountriesService} from './countries.service';
+export {FileSaverService} from './fileSaver.service';
 export {CoreOptions} from './coreOptions';
 export {HttpService} from './http.service';
 export {EntityDecoratorService} from './entityDecorator.service';

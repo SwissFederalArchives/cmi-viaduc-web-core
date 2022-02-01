@@ -9,6 +9,7 @@ import {UiService} from './ui.service';
 import {EntityDecoratorService} from './entityDecorator.service';
 import {StammdatenService} from './stammdaten.service';
 import {CountriesService} from './countries.service';
+import {FileSaverService} from './fileSaver.service';
 export const ALL_SERVICES = [
 	HttpService,
 	CookieService,
@@ -18,6 +19,7 @@ export const ALL_SERVICES = [
 	LocalStorageService,
 	TranslationService,
 	UiService,
+	FileSaverService,
 	EntityDecoratorService,
 	StammdatenService,
 	CountriesService

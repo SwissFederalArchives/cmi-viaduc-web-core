@@ -121,6 +121,6 @@ export class GlobalErrorHandler extends ErrorHandler {
 	}
 
 	private _refreshCurrentPage() {
-		window.location.reload(true);
+		window.location.reload();
 	}
 }

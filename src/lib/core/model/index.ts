@@ -1,4 +1,5 @@
 export * from './account/userUiSettings';
+export * from './collection/collections';
 export * from './entity/entity';
 export * from './entity/entityContext';
 export * from './entity/entityImage';

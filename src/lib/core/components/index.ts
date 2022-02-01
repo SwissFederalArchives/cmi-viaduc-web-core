@@ -10,3 +10,7 @@ export * from './odata/oDataPagination/oDataPagination.component';
 export * from './highlight/highlight.component';
 export * from './columnControls/columnPickerControl/columnPickerControl.component';
 export * from './modal';
+export * from './ui/dialog-service/modal/modal.container';
+export * from './ui/dialog-service/modal/modal.service.component';
+export * from './ui/dialog-service/dialogs/confirmation.modal.component';
+export * from './ui/dialog-service/dialogs/basic.modal.component';
