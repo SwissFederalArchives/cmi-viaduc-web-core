@@ -9,14 +9,13 @@ import { Observable } from 'rxjs';
 import { ClientContext } from '../services/clientContext';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class AuthenticationInterceptor implements HttpInterceptor {
 	constructor(private _context: ClientContext) {}
 	public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		let headers = this._context.getRequestHeaders();
 
-		if (headers) {
+		if (this._context.authenticated) {
 			request = request.clone({
-				setHeaders: headers
+				withCredentials: true
 			});
 		}
 

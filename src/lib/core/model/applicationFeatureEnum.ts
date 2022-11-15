@@ -57,5 +57,7 @@ export enum ApplicationFeatureEnum {
 	ReportingStatisticsReportsEinsehen = 10000096,
 	ReportingStatisticsConverterProgressEinsehen = 10000097,
 	AdministrationSammlungenEinsehen = 10000098,
-	AdministrationSammlungenBearbeiten = 10000099
+	AdministrationSammlungenBearbeiten = 10000099,
+	AnonymisierungManuelleKorrekturenEinsehen = 10000100,
+	AnonymisierungManuelleKorrekturenBearbeiten = 10000101
 }

@@ -94,15 +94,4 @@ export class ClientContext {
 	public set search(value: SearchState) {
 		this._searchState = value;
 	}
-
-	public getRequestHeaders(): any {
-		if (this._currentSession && !_util.isEmpty(this._currentSession.token)) {
-			let headers = {
-				Authorization: `Bearer ${this._currentSession.token}`
-			};
-
-			return headers;
-		}
-		return null;
-	}
 }

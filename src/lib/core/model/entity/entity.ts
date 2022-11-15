@@ -6,12 +6,11 @@ export interface Entity {
 	_metadata?: EntityMetadata;
 	highlight: Highlight;
 	creationPeriod: any[];
-
 	archiveRecordId: string;
 	level?: string;
 	title: string;
 	treeSequence?: number;
-
+	isAnonymized?: boolean;
 	HasImage?: boolean;
 	HasAudioVideo?: boolean;
 	nichtOnlineRecherchierbareDossiers?: string;
@@ -28,6 +27,9 @@ export interface Entity {
 	isDownloadAllowed: boolean;
 	images?: string[];
 	primaryDataDownloadAccessTokens: string[];
+	primaryDataFulltextAccessTokens: string[];
+	fieldAccessTokens: string[];
+	manifestLink?: string;
 
 	explanation: {
 		value: string,

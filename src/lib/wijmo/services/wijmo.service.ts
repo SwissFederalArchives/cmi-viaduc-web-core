@@ -4,6 +4,7 @@ import {FilterType, FlexGridFilter} from '@grapecity/wijmo.grid.filter';
 
 @Injectable()
 export class WijmoService {
+	private regExp = /[(\u0000-\u0008|\u000B-\u000C|\u000E-\u001F)]/g;
 
 	public setUpListColumn(grid: FlexGrid, filter: FlexGridFilter, key: string, dataMap: DataMap) {
 		if (!grid || !grid.columns.getColumn(key)) {
@@ -38,9 +39,23 @@ export class WijmoService {
 	}
 
 	public replaceExcelCorruptionCharsCallback(args: any) {
-		if (args.xlsxCell && args.xlsxCell.value && typeof args.xlsxCell.value === 'string') {
-			let re =  /[^(\u0020-\u007E|\u00A0-\u0217)]/g; // replace chars, that would corrupt the excelfile
-			args.xlsxCell.value = args.xlsxCell.value.replace(re, '');
+		// Beim Callback sind this Parameter null
+		let regEx = /[(\u0000-\u0008|\u000B-\u000C|\u000E-\u001F)]/g;
+		if (args.xlsxCell && args.xlsxCell.formula) {
+			args.xlsxCell.value = '\'' + args.xlsxCell.formula;
+			args.xlsxCell.formula = null;
 		}
+
+		if (args.xlsxCell && args.xlsxCell.value && typeof args.xlsxCell.value === 'string') {
+			args.xlsxCell.value = args.xlsxCell.value.replace(regEx, '');
+		}
+	}
+
+	public replaceExcelCorruptionChars(str: string): string {
+		let result = str.replace(this.regExp, '');
+		if (result[0] === '=') {
+			result = '\'' + result ;
+		}
+		return result;
 	}
 }

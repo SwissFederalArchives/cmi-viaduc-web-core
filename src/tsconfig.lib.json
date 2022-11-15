@@ -27,6 +27,7 @@
 		"baseUrl": "./"
 	},
 	"angularCompilerOptions": {
+		"compilationMode": "partial",
 		"annotateForClosureCompiler": true,
 		"skipTemplateCodegen": false,
 		"strictMetadataEmit": true,

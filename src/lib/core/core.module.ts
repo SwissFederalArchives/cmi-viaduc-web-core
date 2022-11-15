@@ -8,7 +8,6 @@ import {ALL_DIRECTIVES} from './directives/_all';
 import {ALL_PIPES} from './pipes/_all';
 import {ALL_SERVICES} from './services/_all';
 import {GlobalErrorHandler} from './services/globalErrorHandler';
-import {TokenInterceptor} from './interceptors/token.interceptor';
 import {ALL_RESOLVERS} from './routing/_all';
 import {WijmoModule} from '../wijmo/index';
 import JSZip from 'jszip';
@@ -17,6 +16,7 @@ import { ArchiveModel } from './services/archiveModel';
 import { ClientModel } from './services/clientModel';
 import { CoreOptions } from './services/coreOptions';
 import {ClientContext} from './services/clientContext';
+import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
 window['JSZip'] = JSZip;
 
@@ -58,7 +58,7 @@ export class CoreModule {
 				{ provide: ClientModel, useClass: ClientModel },
 				{ provide: CoreOptions, useClass: CoreOptions },
 				{ provide: ClientContext, useClass: ClientContext, deps: [ClientModel] },
-				{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+				{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
 				{ provide: ErrorHandler, useClass: GlobalErrorHandler},
 				...ALL_SERVICES,
 				...ALL_PIPES,

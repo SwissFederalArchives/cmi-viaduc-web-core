@@ -45,4 +45,13 @@ export class HttpService {
 
 		return this._configureObservable<T>(this._http.post(url, body));
 	}
+
+	public put<T>(url: string, body: any, config?: any): Observable<T> {
+		// Prevent browsers from caching requests
+		if (_util.isObject(config) && config.nonce === true) {
+			url = _util.appendUrlParam(url, 'nonce=' + new Date().getTime());
+		}
+
+		return this._configureObservable<T>(this._http.put(url, body));
+	}
 }

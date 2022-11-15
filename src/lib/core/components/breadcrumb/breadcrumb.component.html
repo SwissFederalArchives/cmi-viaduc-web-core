@@ -1,7 +1,7 @@
 <ol tabindex="0" [attr.aria-label]="txt.translate('Breadcrumb', 'breadcrumbComponent.breadcrumb')" class="breadcrumb" role="navigation" *ngIf="items">
 	<li *ngFor="let item of items; let isLast = last;" [ngClass]="item.itemClasses">
 		<a (click)="open(item)" (keydown.enter)="open(item)" tabindex="0">
-			<i *ngIf="item.iconClasses" [ngClass]="item.iconClasses"></i><span *ngIf="item.label">{{item.label}}</span><span *ngIf="item.screenReaderLabel" class="sr-only">{{item.screenReaderLabel}}</span>
+			<i *ngIf="item.iconClasses" [ngClass]="item.iconClasses"></i><span *ngIf="item.label" [innerHTML]="item.label|anonymizedHtml" ></span><span *ngIf="item.screenReaderLabel" class="sr-only">{{item.screenReaderLabel}}</span>
 		</a>
 		<span *ngIf="!isLast" class="icon icon--greater"></span>
 	</li>

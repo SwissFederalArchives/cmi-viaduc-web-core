@@ -332,25 +332,27 @@ export class CmiGridComponent extends WjFlexGrid {
 	private _restorePaging(isOData: boolean) {
 		let colView = this._getSourceAsCollectionView();
 
-		// Restoring Pageindex
+		// Restoring Pageindex & Size
 		let paging = this._getItem<number>(this.name + this._pagingGridSuffix);
-	
-		if (colView && paging !== null && paging !== undefined) {			
-		
-			if (isOData) {
-				colView._pgIdx = paging; // moveToPage does not work, so we have to use the private property..				
-			} else {
-				colView.moveToPage(paging);
-			}			
-		}
+		let pagingSize = this._getItem<number>(this.name + this._pagingSizeSuffix);
 
 		// Restoring Pagingsize
-		let pagingSize = this._getItem<number>(this.name + this._pagingSizeSuffix);
 		if (colView && pagingSize) {
 			colView.pageSize = pagingSize;
+		}
+
+		if (colView && paging !== null && paging !== undefined) {
+
+			if (isOData) {
+				colView._pgIdx = paging; // moveToPage does not work, so we have to use the private property..
+
+			} else {
+				colView.moveToPage(paging);
+			}
 			colView.onPageChanged();
 		}
 	}
+
 	private _restoreGridStateFromSessionStorage() {
 		this._byPassSessionSaveHandler = true;
 		let colView = this._getSourceAsCollectionView();
@@ -363,9 +365,9 @@ export class CmiGridComponent extends WjFlexGrid {
 		if (isOData) {
 			this._restoreOdataFilter(oDataView);
 		}
-		
+
 		this._restorePaging(isOData);
-		
+
 		setTimeout(() => {
 			this._restoreSelection(isOData ? oDataView : colView);
 			this._byPassSessionSaveHandler = false;
@@ -470,7 +472,7 @@ export class CmiGridComponent extends WjFlexGrid {
 				if (!col || col.valueFilter && col.valueFilter.dataMap) {
 					// when a datamap for valuefilter is provided, we dont activate the condition filter
 					continue;
-				} 
+				}
 
 				let cond = col.conditionFilter;
 				if (c.dataType === DataType.String || c.dataType === DataType.Object) {
