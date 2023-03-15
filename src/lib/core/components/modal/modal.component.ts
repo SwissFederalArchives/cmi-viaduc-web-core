@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ViewEncapsulation, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild} from '@angular/core';
 import {UiService} from '../../services/ui.service';
 @Component({
 	selector: 'cmi-viaduc-modal',
@@ -6,7 +6,7 @@ import {UiService} from '../../services/ui.service';
 	styleUrls: ['modal.component.less'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
 
 	@Input()
 	public modalTitle: string;
@@ -32,9 +32,6 @@ export class ModalComponent implements OnInit {
 	private _opened: boolean;
 
 	constructor(private _ui: UiService) {
-	}
-
-	public ngOnInit(): void {
 	}
 
 	public closeModal(event: any): void {

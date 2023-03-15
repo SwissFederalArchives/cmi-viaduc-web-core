@@ -18,8 +18,8 @@ export class ReCaptchaService {
 	public getReady(language: string): Observable<boolean> {
 		if (!this.scriptLoaded) {
 			this.scriptLoaded = true;
-			let doc = <HTMLDivElement>document.body;
-			let script = document.createElement('script');
+			const doc = <HTMLDivElement>document.body;
+			const script = document.createElement('script');
 			script.innerHTML = '';
 			script.src = 'https://www.google.com/recaptcha/api.js?onload=reCaptchaOnloadCallback&render=explicit' + (language ? '&hl=' + language : '');
 			script.async = true;

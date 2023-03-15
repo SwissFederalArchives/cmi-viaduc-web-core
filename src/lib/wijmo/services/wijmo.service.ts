@@ -20,7 +20,7 @@ export class WijmoService {
 		}
 
 		grid.columns.getColumn(key).dataMap = dataMap;
-		let cf = filter.getColumnFilter(key);
+		const cf = filter.getColumnFilter(key);
 
 		cf.filterType = FilterType.Value;
 		cf.valueFilter.dataMap = dataMap;
@@ -28,9 +28,9 @@ export class WijmoService {
 	}
 
 	public getDataMap(enumClass, translateFn: (val) => string) {
-		let pairs = [];
-		for (let key of Object.keys(enumClass)) {
-			let val: number = parseInt(key, 10);
+		const pairs = [];
+		for (const key of Object.keys(enumClass)) {
+			const val: number = parseInt(key, 10);
 			if (!isNaN(val)) {
 				pairs.push({ key: val, name: translateFn(enumClass[enumClass[val]]) });
 			}
@@ -40,7 +40,7 @@ export class WijmoService {
 
 	public replaceExcelCorruptionCharsCallback(args: any) {
 		// Beim Callback sind this Parameter null
-		let regEx = /[(\u0000-\u0008|\u000B-\u000C|\u000E-\u001F)]/g;
+		const regEx = /[(\u0000-\u0008|\u000B-\u000C|\u000E-\u001F)]/g;
 		if (args.xlsxCell && args.xlsxCell.formula) {
 			args.xlsxCell.value = '\'' + args.xlsxCell.formula;
 			args.xlsxCell.formula = null;

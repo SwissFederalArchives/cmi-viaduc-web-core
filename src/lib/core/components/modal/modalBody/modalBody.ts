@@ -1,14 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
 	selector: 'cmi-viaduc-modal-body',
 	templateUrl: 'modalBody.html',
 })
-export class ModalBodyComponent implements OnInit {
+export class ModalBodyComponent {
 
-	constructor() {
-	}
-
-	public ngOnInit(): void {
-	}
 }

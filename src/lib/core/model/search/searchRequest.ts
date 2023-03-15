@@ -35,11 +35,11 @@ export class SearchRequest {
 	public captcha: CaptchaVerificationData;
 
 	public static createSearchModelFromSimple(simpleModel: SimpleSearchModel): SearchModel {
-		let field = new AdvancedSearchField();
+		const field = new AdvancedSearchField();
 		field.value = simpleModel.term;
 		field.key = 'allData';
 
-		let fields: SearchField[] = [field];
+		const fields: SearchField[] = [field];
 		if (simpleModel.dateRange) {
 			fields.push(simpleModel.dateRange);
 		}

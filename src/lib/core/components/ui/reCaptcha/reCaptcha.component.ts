@@ -36,9 +36,6 @@ export class ReCaptchaComponent implements OnInit, OnDestroy, ControlValueAccess
 
 	private widgetId: any = null;
 
-	public onChange: Function = () => {};
-	public onTouched: Function = () => {};
-
 	constructor(
 		private _zone: NgZone,
 		private _context: ClientContext,
@@ -85,7 +82,6 @@ export class ReCaptchaComponent implements OnInit, OnDestroy, ControlValueAccess
 		}
 		// noinspection TypeScriptUnresolvedVariable
 		(<any>window).grecaptcha.reset(this.widgetId);
-		this.onChange(null);
 	}
 
 	// noinspection JSUnusedGlobalSymbols
@@ -110,22 +106,18 @@ export class ReCaptchaComponent implements OnInit, OnDestroy, ControlValueAccess
 	}
 
 	public registerOnChange(fn: any): void {
-		this.onChange = fn;
+		/* ignore it */
 	}
 
 	public registerOnTouched(fn: any): void {
-		this.onTouched = fn;
+		/* ignore it */
 	}
 
 	private reCaptchaCallback(response: string) {
-		this.onChange(response);
-		this.onTouched();
 		this.captchaResponse.emit(response);
 	}
 
 	private reCaptchaExpiredCallback() {
-		this.onChange(null);
-		this.onTouched();
 		this.captchaExpired.emit();
 	}
 }

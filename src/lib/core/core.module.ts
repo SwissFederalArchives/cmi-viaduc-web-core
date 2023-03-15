@@ -17,6 +17,7 @@ import { ClientModel } from './services/clientModel';
 import { CoreOptions } from './services/coreOptions';
 import {ClientContext} from './services/clientContext';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
+import {FlatpickrModule} from 'angularx-flatpickr';
 
 window['JSZip'] = JSZip;
 
@@ -42,13 +43,11 @@ window['JSZip'] = JSZip;
 		RouterModule,
 		WijmoModule,
 		HttpClientModule,
-		TooltipModule
+		TooltipModule,
+		FlatpickrModule.forRoot()
 	]
 })
 export class CoreModule {
-
-	constructor() {
-	}
 
 	public static forRoot(): ModuleWithProviders<CoreModule> {
 		return {

@@ -1,8 +1,7 @@
 import {ApplicationRef, ErrorHandler, Injectable, Injector} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActiveToast, ToastrService} from 'ngx-toastr';
-import * as moment_ from 'moment';
-const moment = moment_;
+import moment from 'moment';
 import {TranslationService} from './translation.service';
 
 @Injectable()
@@ -25,7 +24,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 
 		this._txt = this._injector.get(TranslationService);
 		this._toastr = this._injector.get(ToastrService);
-		let appRef = this._injector.get(ApplicationRef);
+		const appRef = this._injector.get(ApplicationRef);
 
 		const errorTitle = this._txt.get('errors.errorTitle', 'Fehler');
 
@@ -44,7 +43,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 			this._logError(unknownErrorMessage, 'UNKNOWN ERROR');
 		}
 
-		let err = this._toastr.error(unknownErrorMessage, errorTitle,	{
+		const err = this._toastr.error(unknownErrorMessage, errorTitle,	{
 			disableTimeOut: true,
 			closeButton: true,
 			easeTime: 50,
@@ -52,7 +51,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 
 		if (err) { // toast is null if it's a duplicate
 			this._addClickListener(err);
-			let sub = err.onShown.subscribe(() => {
+			const sub = err.onShown.subscribe(() => {
 				appRef.tick();
 
 				if (sub) {
@@ -68,7 +67,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 			return;
 		}
 
-		let sub = err.onTap.subscribe(() => {
+		const sub = err.onTap.subscribe(() => {
 			this._refreshCurrentPage();
 			if (sub) {
 				sub.unsubscribe();
@@ -77,11 +76,11 @@ export class GlobalErrorHandler extends ErrorHandler {
 	}
 
 	private _logJSError(e: any) {
-		let msg = e.message || e;
+		const msg = e.message || e;
 
 		if (e instanceof TypeError) {
 			this._logError(msg, 'TYPE ERROR');
-		} else if (e instanceof DOMError) {
+		} else if (e instanceof DOMException) {
 			this._logError(msg, 'DOM ERROR');
 		} else if (e instanceof EvalError) {
 			this._logError(msg, 'EVAL ERROR');

@@ -4,7 +4,7 @@
 // </auto-generated>
 // ----------------------
 
-/* tslint:disable */
+/* eslint-disable */
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 

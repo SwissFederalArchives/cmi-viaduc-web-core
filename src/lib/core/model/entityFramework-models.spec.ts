@@ -1,5 +1,5 @@
 import {ArchiveRecordContextItem, ManuelleKorrekturDto, VManuelleKorrekturDto} from './entityFramework-models';
-import * as moment from 'moment';
+import moment from 'moment';
 
 describe('Entity Framework Tests', () => {
 

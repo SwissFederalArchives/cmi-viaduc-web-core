@@ -102,7 +102,7 @@ export class Routing {
 
 		while (i < parts.length) {
 			let part = parts[i];
-			let indexOfHtml = part.indexOf('.html');
+			const indexOfHtml = part.indexOf('.html');
 			if (indexOfHtml >= 0) {
 				part = part.substring(0, indexOfHtml);
 			}
@@ -129,7 +129,7 @@ export class Routing {
 	}
 
 	public static localizeRoutes(language: string, routes: Routes, depth = 0): Routes {
-		let locals: Routes = [];
+		const locals: Routes = [];
 
 		for (let i = 0; i < routes.length; i += 1) {
 			const route = routes[i];

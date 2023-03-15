@@ -7,5 +7,5 @@ export class SearchState {
 	public result: EntityResult;
 	public error: SearchError;
 	public browse: SearchBrowseState;
-	public advancedSearch: boolean = false;
+	public advancedSearch = false;
 }

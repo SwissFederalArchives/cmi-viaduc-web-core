@@ -4,10 +4,14 @@
    - [cmi-viaduc-web-frontend](https://github.com/SwissFederalArchives/cmi-viaduc-web-frontend)
    - [cmi-viaduc-web-management](https://github.com/SwissFederalArchives/cmi-viaduc-web-management)
    - [cmi-viaduc-backend](https://github.com/SwissFederalArchives/cmi-viaduc-backend)
+   - [cmi-iiif-frontend](https://github.com/SwissFederalArchives/cmi-iiif-frontend)
+   - [cmi-iiif-backend](https://github.com/SwissFederalArchives/cmi-iiif-backend)
+
 
 # Context
 
 The [Viaduc](https://github.com/SwissFederalArchives/cmi-viaduc) project includes 4 code repositories. The present repository `cmi-viaduc-web-core` is an Angular library. This library is used in the other two applications _public access_ ([cmi-viaduc-web-frontend](https://github.com/SwissFederalArchives/cmi-viaduc-web-frontend)) and _internal management_ ([cmi-viaduc-web-management](https://github.com/SwissFederalArchives/cmi-viaduc-web-management)) as a common code base and component library. The frontend applications are hosted in an `ASP.NET` container (see _backend_ repository [cmi-viaduc-backend](https://github.com/SwissFederalArchives/cmi-viaduc-backend)) and communicate with the system via web API.
+With the release 2.0.0.1113, two new repositories were added to provide the system with IIIF viewer capabilities. There is the actual _IIIF-Viewer_ ([cmi-iiif-frontend](https://github.com/SwissFederalArchives/cmi-iiif-frontend)) and the required _backend_ ([cmi-iiif-backend](https://github.com/SwissFederalArchives/cmi-iiif-backend)) that adds the required IIIF services like search.
 
 ![The Big-Picture](docs/imgs/context.svg)
 

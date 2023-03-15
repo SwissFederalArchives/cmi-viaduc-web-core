@@ -10,8 +10,8 @@ export class AnonymizedHtmlPipe implements PipeTransform {
 	constructor(private translationService: TranslationService,
 				private sanitizer: DomSanitizer) {}
 
-	public transform(value: string, cssClassName: string = 'text-anonymized', tooltip: string = 'Aus Datenschutzgründen anonymisiert.', pattern: string = '███', container: string = null) {
-		let text = this.translationService.translate(tooltip, 'anonymized.Tooltip');
+	public transform(value: string, cssClassName = 'text-anonymized', tooltip = 'Aus Datenschutzgründen anonymisiert.', pattern = '███', container: string = null) {
+		const text = this.translationService.translate(tooltip, 'anonymized.Tooltip');
 
 		let html = `<span class=${cssClassName} data-toggle="tooltip" title="${text}" >${pattern}</span>`;
 		if (container === 'body') {

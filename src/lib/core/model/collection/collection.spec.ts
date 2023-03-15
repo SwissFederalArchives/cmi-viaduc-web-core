@@ -1,5 +1,4 @@
-
-import * as moment from 'moment';
+import moment from 'moment';
 import {TestBed} from '@angular/core/testing';
 import {CollectionDto, CollectionListItemDto} from '../entityFramework-models';
 

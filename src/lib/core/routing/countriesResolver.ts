@@ -22,7 +22,7 @@ export class CountriesResolver implements Resolve<any> {
 		if (this._countriesService.hasCountries(lang)) {
 			return this._countriesService.getCountries(lang);
 		} else {
-			return this._countriesService.loadCountriesAssertDefault(lang, this._context.defaultLanguage).then((res) => {
+			return this._countriesService.loadCountriesAssertDefault(lang, this._context.defaultLanguage).then(() => {
 				return this._countriesService.getCountries(lang);
 			});
 		}

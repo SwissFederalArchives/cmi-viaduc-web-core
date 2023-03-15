@@ -24,8 +24,8 @@ const diacriticsReplacements = [];
 	repl += 'Ī|Ń|Ŝ|ŵ|ù|Ē|ī|ń|ŝ|Ŷ|Ə|ú|ē|Ĭ|Ņ|Ş|ŷ';
 	base += 'I|N|S|w|u|E|i|n|s|Y|e|u|e|I|N|S|y';
 
-	let rs = repl.split('|');
-	let bs = base.split('|');
+	const rs = repl.split('|');
+	const bs = base.split('|');
 
 	for (i = 0; i < rs.length; i++) {
 		diacriticsReplacements.push({
@@ -99,15 +99,15 @@ export class Utilities {
 
 	public static clone(obj: any): any {
 		if (Utilities.isArray(obj)) {
-			let arr = [];
+			const arr = [];
 			obj.forEach((x) => {
 				arr.push(Utilities.clone(x));
 			});
 			return arr;
 		} else {
 			return Object.keys(obj).reduce(function (newObj, key) {
-				let val = obj[key];
-				let newVal = (typeof val === 'object' && val) ? Utilities.clone(val) : val;
+				const val = obj[key];
+				const newVal = (typeof val === 'object' && val) ? Utilities.clone(val) : val;
 				newObj[key] = newVal;
 				return newObj;
 			}, {});
@@ -116,8 +116,8 @@ export class Utilities {
 
 	public static cloneWithLowerCasedKeys(obj: any): any {
 		return Object.keys(obj).reduce(function (newObj, key) {
-			let val = obj[key];
-			let newVal = (typeof val === 'object') ? Utilities.cloneWithLowerCasedKeys(val) : val;
+			const val = obj[key];
+			const newVal = (typeof val === 'object') ? Utilities.cloneWithLowerCasedKeys(val) : val;
 			newObj[key.toLowerCase()] = newVal;
 			return newObj;
 		}, {});
@@ -163,8 +163,8 @@ export class Utilities {
 
 	public static trim(s: string, c?: string): string {
 		c = c || '\\s';
-		let l = new RegExp('^' + c + '+', '');
-		let r = new RegExp(c + '+$', '');
+		const l = new RegExp('^' + c + '+', '');
+		const r = new RegExp(c + '+$', '');
 		return s.replace(l, '').replace(r, '');
 	}
 
@@ -212,14 +212,14 @@ export class Utilities {
 	}
 
 	public static naturalCompare(a: any, b: any, key: string): number {
-		let as = this.isString(a) ? a : a[key],
+		const as = this.isString(a) ? a : a[key],
 			bs = this.isString(b) ? b : b[key],
 			aa = String(as).split(naturalCompareGroups),
 			bb = String(bs).split(naturalCompareGroups),
 			min = Math.min(aa.length, bb.length);
 
 		for (let i = 0; i < min; i++) {
-			let av = parseFloat(aa[i]) || aa[i].toLowerCase(),
+			const av = parseFloat(aa[i]) || aa[i].toLowerCase(),
 				bv = parseFloat(bb[i]) || bb[i].toLowerCase();
 			if (av < bv) {
 				return -1;
@@ -234,7 +234,7 @@ export class Utilities {
 	public static format(/*input,value0,value1,...]*/) {
 		let args = arguments, input = args[0], reSeq = 0;
 		return input.replace(/\{(\d+)\}/g, function (match, capture) {
-			let seq = (1 * capture + 1);
+			const seq = (1 * capture + 1);
 			return (seq < args.length) ? args[seq] : '{' + (reSeq++) + '}';
 		});
 	}
@@ -257,7 +257,7 @@ export class Utilities {
 			i = 0;
 
 		for (i = 0; i < repl.length; i += 1) {
-			let r = repl[i];
+			const r = repl[i];
 			s = s.replace(r.repl, r.base);
 		}
 
@@ -329,7 +329,7 @@ export class Utilities {
 	public static decycleJson(object: any, replacer?: any): any {
 		// see https://github.com/douglascrockford/JSON-js/blob/master/cycle.js
 
-		let objects = new WeakMap();
+		const objects = new WeakMap();
 
 		return (function derez(value, path) {
 			let oldPath;
@@ -382,7 +382,7 @@ export class Utilities {
 	// region Browser
 
 	public static getQueryParams(query: string = null): any {
-		let params = {};
+		const params = {};
 		let qs = this.isEmpty(query) ? window.location.search : query;
 		if (this.isEmpty(qs)) {
 			return params;

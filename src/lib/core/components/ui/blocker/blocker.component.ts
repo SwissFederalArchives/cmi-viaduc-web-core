@@ -9,7 +9,4 @@ export class BlockerComponent {
 
 	@Input()
 	public options: any = {};
-
-	constructor() {
-	}
 }

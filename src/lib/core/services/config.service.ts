@@ -13,8 +13,8 @@ export class ConfigService {
 	}
 
 	private _findSetting(container, key) {
-		let vs = container,
-			v,
+		const  vs = container;
+		let	v,
 			ks = [],
 			k = '',
 			vt = vs;
@@ -42,9 +42,9 @@ export class ConfigService {
 			if (settingSection.hasOwnProperty(key)) {
 				settingSection[key] = value;
 			} else {
-				let keys = key.split('.');
+				const keys = key.split('.');
 
-				let lastKey = keys[keys.length - 1];
+				const lastKey = keys[keys.length - 1];
 				let k = keys.shift();
 
 				while (settingSection && keys.length >= 0) {
@@ -89,7 +89,7 @@ export class ConfigService {
 	public getValidPagingSize(): number {
 		let pagingSize: number;
 
-		let userSettings = this.getUserSettings();
+		const userSettings = this.getUserSettings();
 
 		if (userSettings) {
 			pagingSize = userSettings.pagingSize;
@@ -117,7 +117,7 @@ export class ConfigService {
 		}
 
 		if (!settings.selectedSortingField) {
-			let fields = this.getSetting('search.simpleSearchSortingFields', [{
+			const fields = this.getSetting('search.simpleSearchSortingFields', [{
 				'displayName': 'Relevanz',
 				'orderBy': 'relevanz',
 				'sortOrder': ''

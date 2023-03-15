@@ -37,11 +37,11 @@ export class CmiGridComponent extends WjFlexGrid {
 
 	@Input()
 	/* sets the visibility of the checkbox-selection column */
-	public displaySelectionColumn: boolean = false;
+	public displaySelectionColumn = false;
 
 	@Input()
 	/* sets the default filter type (condition = 1, value = 2, both = 3) */
-	public defaultFilterType: number = 1;
+	public defaultFilterType = 1;
 
 	@Input()
 	/* if no sorts are session-saved, this column key is used for default sort (descending) */
@@ -82,7 +82,7 @@ export class CmiGridComponent extends WjFlexGrid {
 	public currentSelection: Set<object> = new Set<object>();
 
 	/* Disables input, but supports selection */
-	public disableInput: boolean = true;
+	public disableInput = true;
 
 	private _dataMaps: { [id: string]: DataMap; };
 	private _enableMultiSort = false;
@@ -161,20 +161,18 @@ export class CmiGridComponent extends WjFlexGrid {
 	public exportToExcelOData(fileName: string): Observable<void> {
 		// Save current state
 		this._byPassSessionSaveHandler = true;
-		let oDataCol = this._getSourceAsODataCollectionView();
-		let originPageSize = oDataCol.pageSize;
-		let originPageIndex = oDataCol.pageIndex;
+		const oDataCol = this._getSourceAsODataCollectionView();
+		const originPageSize = oDataCol.pageSize;
+		const originPageIndex = oDataCol.pageIndex;
 
 		// Load every page
 		oDataCol.pageSize = 0;
 		oDataCol.sortOnServer = false;
 		oDataCol.pageOnServer = false;
 
-		let that = this;
-
 		return new Observable<void>((obs) => {
-			let onLoadedFuncExcel = () => {
-				that._exportToExcelInternal(fileName).subscribe(() => {
+			const onLoadedFuncExcel = () => {
+				this._exportToExcelInternal(fileName).subscribe(() => {
 					// Reset view to previous state when saved
 					oDataCol.pageSize = originPageSize;
 					oDataCol.pageOnServer = true;
@@ -212,16 +210,15 @@ export class CmiGridComponent extends WjFlexGrid {
 	public exportToExcel(fileName: string): Observable<void> {
 		// Save current state
 		this._byPassSessionSaveHandler = true;
-		let colView = this._getSourceAsCollectionView();
-		let originPageSize = colView.pageSize;
-		let originPageIndex = colView.pageIndex;
+		const colView = this._getSourceAsCollectionView();
+		const originPageSize = colView.pageSize;
+		const originPageIndex = colView.pageIndex;
 
 		// Load every page
 		colView.pageSize = 0;
 
-		let that = this;
 		return new Observable<void>((obs) => {
-			that._exportToExcelInternal(fileName).subscribe(() => {
+			this._exportToExcelInternal(fileName).subscribe(() => {
 				// Reset view to previous state when saved
 				colView.pageSize = originPageSize;
 				colView.moveToPage(originPageIndex);
@@ -266,7 +263,7 @@ export class CmiGridComponent extends WjFlexGrid {
 			return;
 		}
 
-		let dataSet = this._getSourceAsCollectionView();
+		const dataSet = this._getSourceAsCollectionView();
 		if (!dataSet) {
 			return;
 		}
@@ -278,10 +275,10 @@ export class CmiGridComponent extends WjFlexGrid {
 
 		this._setItem(this.name + this._pagingSizeSuffix, dataSet ? dataSet.pageSize : null);
 
-		let pageIndex = dataSet ? dataSet.pageIndex : null;
+		const pageIndex = dataSet ? dataSet.pageIndex : null;
 		this._setItem(this.name + this._pagingGridSuffix, pageIndex);
 
-		let oDataSet = this._getSourceAsODataCollectionView();
+		const oDataSet = this._getSourceAsODataCollectionView();
 		if (oDataSet) {
 			this._setItem(this.name + this._filterGridSuffix, oDataSet && oDataSet.filterDefinition ? oDataSet.filterDefinition : null);
 		}
@@ -291,13 +288,13 @@ export class CmiGridComponent extends WjFlexGrid {
 		// Selektierte Element speichern
 		if (this.selection && this.selection.row >= 0 && this.selection.col >= 0) {
 			this._setItem(this._getNameSelectedElement(dataSet, dataSet.pageIndex), this.selection.row);
-			let pageCount = dataSet && dataSet.pageCount !== undefined ? dataSet.pageCount : 300;
+			const pageCount = dataSet && dataSet.pageCount !== undefined ? dataSet.pageCount : 300;
 			for (let i = 0; i < pageCount; i++) {
 				if (i === dataSet.pageIndex) {
 					continue;
 				}
 
-				let selectedItemSessionName = this._getNameSelectedElement(null, i);
+				const selectedItemSessionName = this._getNameSelectedElement(null, i);
 				this._removeItem(selectedItemSessionName);
 			}
 		}
@@ -312,7 +309,7 @@ export class CmiGridComponent extends WjFlexGrid {
 			return this.name + this._selectedElementSuffix;
 		}
 
-		let pageIndex = index ?  index : dataSet.pageIndex;
+		const pageIndex = index ?  index : dataSet.pageIndex;
 		return this.name + '_' + pageIndex + '_' + this._selectedElementSuffix;
 	}
 
@@ -330,11 +327,11 @@ export class CmiGridComponent extends WjFlexGrid {
 	}
 
 	private _restorePaging(isOData: boolean) {
-		let colView = this._getSourceAsCollectionView();
+		const colView = this._getSourceAsCollectionView();
 
 		// Restoring Pageindex & Size
-		let paging = this._getItem<number>(this.name + this._pagingGridSuffix);
-		let pagingSize = this._getItem<number>(this.name + this._pagingSizeSuffix);
+		const paging = this._getItem<number>(this.name + this._pagingGridSuffix);
+		const pagingSize = this._getItem<number>(this.name + this._pagingSizeSuffix);
 
 		// Restoring Pagingsize
 		if (colView && pagingSize) {
@@ -355,9 +352,9 @@ export class CmiGridComponent extends WjFlexGrid {
 
 	private _restoreGridStateFromSessionStorage() {
 		this._byPassSessionSaveHandler = true;
-		let colView = this._getSourceAsCollectionView();
-		let oDataView = this._getSourceAsODataCollectionView();
-		let isOData = !!oDataView;
+		const colView = this._getSourceAsCollectionView();
+		const oDataView = this._getSourceAsODataCollectionView();
+		const isOData = !!oDataView;
 
 		// BE CAREFUL: the order of the restore functions are important and any change can break this function
 		this._restoreSortExpressions(colView);
@@ -380,7 +377,7 @@ export class CmiGridComponent extends WjFlexGrid {
 			return;
 		}
 
-		let selectedRow = this._getItem<number>(this._getNameSelectedElement(view, view.pageIndex));
+		const selectedRow = this._getItem<number>(this._getNameSelectedElement(view, view.pageIndex));
 
 		if (selectedRow && selectedRow >= 0) {
 			this.select(new CellRange(selectedRow), true);
@@ -389,16 +386,16 @@ export class CmiGridComponent extends WjFlexGrid {
 
 	private _restoreFilterDefinitions() {
 		// Restoring FlexGrid Filter
-		let filterWerte = this._getItem<string>(this.name + this._filterCompSuffix);
+		const filterWerte = this._getItem<string>(this.name + this._filterCompSuffix);
 		if (this.filter && filterWerte) {
 			this.filter.filterDefinition = filterWerte;
 		}
 
 		/* Snapshoting the values of the valuesfilter */
 		if (this._dataMaps) {
-			let filterValues = this.columns.map(c => {
+			const filterValues = this.columns.map(c => {
 				if (c.binding) {
-					let cf = this.filter.getColumnFilter(c.binding);
+					const cf = this.filter.getColumnFilter(c.binding);
 					if (cf && cf.valueFilter.showValues) {
 						return {key: c.binding, values: cf.valueFilter.showValues};
 					}
@@ -409,9 +406,9 @@ export class CmiGridComponent extends WjFlexGrid {
 			this._updateFilterMaps();
 
 			/* restoring snapshoted values of valuefilters  */
-			for (let fv of filterValues) {
+			for (const fv of filterValues) {
 				if (fv) {
-					let cf = this.filter.getColumnFilter(fv.key);
+					const cf = this.filter.getColumnFilter(fv.key);
 					cf.valueFilter.showValues = fv.values;
 				}
 			}
@@ -419,13 +416,13 @@ export class CmiGridComponent extends WjFlexGrid {
 
 		/* Appyling all column filters to the grid */
 		this.filter.apply();
-		this.onFilterApplied.next();
+		this.onFilterApplied.next(filterWerte);
 	}
 
 	private _restoreOdataFilter(oDataView) {
 		oDataView.oDataVersion = 4;
 
-		let updatedViewHandler = () => {
+		const updatedViewHandler = () => {
 			this.deferUpdate(() => {
 				this._setContainsOnConditionFilterColumns();
 			});
@@ -437,16 +434,16 @@ export class CmiGridComponent extends WjFlexGrid {
 		oDataView.onLoaded();
 
 		// Restoring ODataFilter
-		let filter = this._getItem<string>(this.name + this._filterGridSuffix);
+		const filter = this._getItem<string>(this.name + this._filterGridSuffix);
 		if (filter) {
 			oDataView.filterDefinition = filter;
 		}
 	}
 
 	private _restoreSortExpressions(colView) {
-		let sorts = this._getItem<any[]>(this.name + this._sortGridSuffix);
+		const sorts = this._getItem<any[]>(this.name + this._sortGridSuffix);
 		if (sorts) {
-			for (let sort of sorts) {
+			for (const sort of sorts) {
 				if (sort.key) {
 					colView.sortDescriptions.push(new SortDescription(sort.key, sort.asc));
 				}
@@ -454,7 +451,7 @@ export class CmiGridComponent extends WjFlexGrid {
 		} else {
 			if (this.defaultSortColumnKey && this.defaultSortColumnKey.trim().length > 0) {
 				// Standardmässig nach der Ersten Spalte (ohne Checkbox) sortieren
-				let defaultSortCol = this.columns.filter(c => c.binding === this.defaultSortColumnKey)[0];
+				const defaultSortCol = this.columns.filter(c => c.binding === this.defaultSortColumnKey)[0];
 				if (defaultSortCol && defaultSortCol.binding) {
 					colView.sortDescriptions.push(new SortDescription(defaultSortCol.binding, false));
 				}
@@ -465,16 +462,16 @@ export class CmiGridComponent extends WjFlexGrid {
 	private _setContainsOnConditionFilterColumns() {
 		this.filter.defaultFilterType = FilterType.Condition;
 
-		for (let c of this.columns) {
+		for (const c of this.columns) {
 			if (c.binding) {
-				let col = this.filter.getColumnFilter(c.binding);
+				const col = this.filter.getColumnFilter(c.binding);
 
 				if (!col || col.valueFilter && col.valueFilter.dataMap) {
 					// when a datamap for valuefilter is provided, we dont activate the condition filter
 					continue;
 				}
 
-				let cond = col.conditionFilter;
+				const cond = col.conditionFilter;
 				if (c.dataType === DataType.String || c.dataType === DataType.Object) {
 					cond.condition1.operator = !cond.condition1.operator ? Operator.CT : cond.condition1.operator;
 				}
@@ -483,7 +480,7 @@ export class CmiGridComponent extends WjFlexGrid {
 	}
 
 	private _getItem<T>(key: string): T {
-		let result = window.sessionStorage.getItem(key);
+		const result = window.sessionStorage.getItem(key);
 		if (result === 'undefined') {
 			return null;
 		}
@@ -502,31 +499,32 @@ export class CmiGridComponent extends WjFlexGrid {
 	/* Displays a tooltip for every cell which has been clipped off */
 	private _registerTooltips() {
 		let range = null;
-		let tooltip = new Tooltip();
-
-		let flexGrid = this;
+		const tooltip = new Tooltip();
+		/* eslint-disable @typescript-eslint/no-this-alias */
+		const flexGrid = this;
+		/* eslint-enable @typescript-eslint/no-this-alias */
 		this.hostElement.addEventListener('mousemove', function (e) {
-			let ht = flexGrid.hitTest(e);
+			const ht = flexGrid.hitTest(e);
 			if (!ht.range.equals(range)) {
 				if (ht.cellType === CellType.Cell) {
 					range = ht.range;
-					let cellElement = document.elementFromPoint(e.clientX, e.clientY);
+					const cellElement = document.elementFromPoint(e.clientX, e.clientY);
 
-					let cellBounds = flexGrid.getCellBoundingRect(ht.row, ht.col);
-					let data = escapeHtml(flexGrid.getCellData(range.row, range.col, true));
+					const cellBounds = flexGrid.getCellBoundingRect(ht.row, ht.col);
+					const data = escapeHtml(flexGrid.getCellData(range.row, range.col, true));
 
 					if (cellElement.clientWidth !== cellElement.scrollWidth) {
 						tooltip.show(flexGrid.hostElement, data, cellBounds);
 					}
 				} else if (ht.cellType === CellType.ColumnHeader) {
 					range = ht.range;
-					let cellElement = document.elementFromPoint(e.clientX, e.clientY);
-					let column = flexGrid.columns[ht.col] as Column;
-					let data = column.header;
+					const cellElement = document.elementFromPoint(e.clientX, e.clientY);
+					const column = flexGrid.columns[ht.col] as Column;
+					const data = column.header;
 					if (cellElement.clientWidth !== cellElement.scrollWidth) {
 
-						let cellBounds = cellElement.getBoundingClientRect();
-						let rect = new Rect(cellBounds.left, cellBounds.top, cellBounds.width, cellBounds.height);
+						const cellBounds = cellElement.getBoundingClientRect();
+						const rect = new Rect(cellBounds.left, cellBounds.top, cellBounds.width, cellBounds.height);
 						tooltip.show(flexGrid.hostElement, data, rect);
 					}
 				}
@@ -569,13 +567,13 @@ export class CmiGridComponent extends WjFlexGrid {
 			return;
 		}
 
-		let col = this.columns[e.col] as Column;
+		const col = this.columns[e.col] as Column;
 		if (col.binding === 'unknown') {
 			return;
 		}
 
-		let collection = this._getSourceAsCollectionView();
-		let existingSort = collection.sortDescriptions.filter(c => c.property === col.binding)[0] as SortDescription;
+		const collection = this._getSourceAsCollectionView();
+		const existingSort = collection.sortDescriptions.filter(c => c.property === col.binding)[0] as SortDescription;
 		if (existingSort) {
 			asc = !existingSort.ascending;
 			collection.sortDescriptions.remove(existingSort);
@@ -585,7 +583,7 @@ export class CmiGridComponent extends WjFlexGrid {
 			return; // allow tripple state, clear filter on third click
 		}
 
-		let sd = new SortDescription(col.binding, asc);
+		const sd = new SortDescription(col.binding, asc);
 		collection.sortDescriptions.push(sd);
 	}
 
@@ -603,17 +601,17 @@ export class CmiGridComponent extends WjFlexGrid {
 			return;
 		}
 
-		for (let cf of this.columns.map(c => c.binding ? this.filter.getColumnFilter(c.binding) : null)) {
+		for (const cf of this.columns.map(c => c.binding ? this.filter.getColumnFilter(c.binding) : null)) {
 			if (!cf || cf.valueFilter.dataMap !== undefined) {
 				continue;
 			}
 
-			let key = cf.column.binding;
+			const key = cf.column.binding;
 			if (!this._dataMaps.hasOwnProperty(key)) {
 				continue;
 			}
 
-			let dm = this._dataMaps[key];
+			const dm = this._dataMaps[key];
 			this._wjs.setUpListColumn(this as any, this.filter, key, dm);
 		}
 	}
@@ -645,23 +643,25 @@ export class CmiGridComponent extends WjFlexGrid {
 
 				// create and initialize checkbox
 				cell.innerHTML = '<input type="checkbox"> ' + cell.innerHTML;
-				let cb = cell.firstChild;
+				const cb = cell.firstChild;
 				cb.checked = cnt > 0;
 				cb.indeterminate = cnt > 0 && cnt < flex.rows.length;
 
-				let that = this;
+				/* eslint-disable @typescript-eslint/no-this-alias */
+				const flexGrid = this;
+				/* eslint-enable @typescript-eslint/no-this-alias */
 				// apply checkbox value to cells
 				cb.addEventListener('click', function (e) {
 					flex.beginUpdate();
 					for (let i = 0; i < flex.rows.length; i++) {
 						const item = flex.rows[i].dataItem;
-						that.addOrRemoveItemFromSelection(item, cb.checked ? 'add' : 'remove');
+						flexGrid.addOrRemoveItemFromSelection(item, cb.checked ? 'add' : 'remove');
 					}
 					flex.endUpdate();
 				});
 			}
 		} else if (panel.cellType === CellType.Cell) {
-			let input = cell.firstChild;
+			const input = cell.firstChild;
 			if (!input) {
 				return;
 			}
@@ -685,7 +685,7 @@ export class CmiGridComponent extends WjFlexGrid {
 			return super.onBeginningEdit(e);
 		}
 
-		let odata = this.collectionView as ODataCollectionView;
+		const odata = this.collectionView as ODataCollectionView;
 
 		if (odata) {
 			odata.cancelEdit();

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CanDeactivate} from '@angular/router';
 import {ComponentCanDeactivate} from '../model/component-can-deactivate';
 import {ModalService} from '../components/ui/dialog-service/modal/modal.service';
-import {BasicModalComponent, ConfirmationModalComponent} from '../components';
 import {TranslationService} from '../services/translation.service';
+import {CanDeactivateData} from '../model';
 
 @Injectable()
 export class CanDeactivateGuard implements CanDeactivate<ComponentCanDeactivate> {
@@ -46,27 +46,27 @@ export class CanDeactivateGuard implements CanDeactivate<ComponentCanDeactivate>
 	}
 
 	private openConfirmationModal(message: string) {
-		this.modalService.open(ConfirmationModalComponent,
-			{
-				title: this.txt.get('canDeactivateGuard.Title', 'Warnung'),
-				content: message,
-				yesButtonText: this.txt.get('canDeactivateGuard.yes', 'Ja'),
-				noButtonText: this.txt.get('canDeactivateGuard.no', 'Nein'),
-				onOk: () => { this.dialogResult = true; this.dialogIsClosed = true; },
-				onCancel: () => { this.dialogResult = false; this.dialogIsClosed = true; }
-
-			});
+		const canDeactivateData = new CanDeactivateData() ;
+		canDeactivateData.title = this.txt.get('canDeactivateGuard.Title', 'Warnung');
+		canDeactivateData.content = message;
+		canDeactivateData.yesButtonText = this.txt.get('canDeactivateGuard.yes', 'Ja')
+		canDeactivateData.noButtonText = this.txt.get('canDeactivateGuard.no', 'Nein');
+		canDeactivateData.result.subscribe((result: boolean) => {
+			this.dialogResult = result;
+			this.dialogIsClosed = true;
+		});
+		this.modalService.openDialog(canDeactivateData);
 	}
 
 	private showSimpleMessage(message: string) {
-		this.modalService.open(BasicModalComponent,
-			{
-				title: this.txt.get('canDeactivateGuard.Title', 'Warnung'),
-				content: message,
-				closeButtonText: this.txt.get('canDeactivateGuard.close', 'Schliessen'),
-				onOk: () => { this.dialogResult = true; this.dialogIsClosed = true; },
-				onCancel: () => { this.dialogResult = false; this.dialogIsClosed = true; }
-
-			});
+		const canDeactivateData = new CanDeactivateData() ;
+		canDeactivateData.title = this.txt.get('canDeactivateGuard.Title', 'Warnung');
+		canDeactivateData.content = message;
+		canDeactivateData.closeButtonText = this.txt.get('canDeactivateGuard.close', 'Schliessen'),
+		canDeactivateData.result.subscribe((result: boolean) => {
+			this.dialogResult = result; // is always false
+			this.dialogIsClosed = true;
+		});
+		this.modalService.openMessage(canDeactivateData);
 	}
 }

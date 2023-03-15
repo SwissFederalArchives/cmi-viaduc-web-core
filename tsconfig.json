@@ -8,7 +8,9 @@
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "target": "es5",
+		"esModuleInterop":  true,
+		"allowSyntheticDefaultImports": true,
+    "target": "ES2020",
     "typeRoots": [
       "node_modules/@types"
     ],

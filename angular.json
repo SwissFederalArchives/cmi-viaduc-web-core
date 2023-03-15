@@ -7,14 +7,14 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "library",
-			"prefix": "lib",
+      "prefix": "lib",
       "architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
-					"options": {
-						"tsConfig": "src/tsconfig.lib.json",
-						"project": "src/ng-package.json"
-					},
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "src/tsconfig.lib.json",
+            "project": "src/ng-package.json"
+          },
           "configurations": {
             "production": {
               "budgets": [
@@ -66,8 +66,9 @@
             "karmaConfig": "karma.conf.js",
             "scripts": [],
             "styles": [
-              "src/styles.less"
-            ],
+              "src/styles.less",
+              "node_modules/flatpickr/dist/flatpickr.css"
+						],
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -75,21 +76,18 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.lib.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/**/*.spec.ts"
-            ]
+						"eslintConfig": ".eslintrc.js",
+						"lintFilePatterns": [
+							"**/*.ts",
+							"**/*.d.ts"
+						]
           }
         }
       }
     }
-  },
+	},
   "defaultProject": "cmi-viaduc-web-core",
   "schematics": {
     "@schematics/angular:component": {
@@ -99,5 +97,10 @@
     "@schematics/angular:directive": {
       "prefix": "cmi"
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

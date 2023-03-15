@@ -46,7 +46,7 @@ export class CountriesService {
 	}
 
 	public loadCountries(language: string, defaultLanguage: string = null): Promise<Countries> {
-		let promises: Promise<Countries>[] = [];
+		const promises: Promise<Countries>[] = [];
 
 		if (defaultLanguage && language !== defaultLanguage && !this.hasCountries(defaultLanguage)) {
 			promises.push(this._loadCountries(defaultLanguage));
@@ -80,7 +80,7 @@ export class CountriesService {
 	}
 
 	public sortCountriesByName(countries: Countries, clone = true): Countries {
-		let cntrs = clone ? <Countries>_util.clone(countries) : countries;
+		const cntrs = clone ? <Countries>_util.clone(countries) : countries;
 		return cntrs.sort(this._compareCountriesByName);
 	}
 }

@@ -20,7 +20,7 @@ export class TooltipDirective {
 	public tooltipDisabled: boolean;
 
 	@Input()
-	public tooltipAnimation: boolean = true;
+	public tooltipAnimation = true;
 
 	@Input()
 	public tooltipPlacement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';

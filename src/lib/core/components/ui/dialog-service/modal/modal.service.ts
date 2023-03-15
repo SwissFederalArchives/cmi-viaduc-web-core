@@ -1,5 +1,8 @@
-import { ViewContainerRef, Injectable, Type, ComponentRef, ComponentFactoryResolver, Injector } from '@angular/core';
+import { ViewContainerRef, Injectable, ComponentRef, Injector } from '@angular/core';
 import { Observable, Subject, ReplaySubject } from 'rxjs';
+import {ConfirmationModalComponent} from '../dialogs/confirmation.modal.component';
+import {BasicModalComponent} from '../dialogs/basic.modal.component';
+import {CanDeactivateData} from '../../../../model';
 
 @Injectable({
 	providedIn: 'root'
@@ -10,25 +13,45 @@ export class ModalService {
 	public activeInstances$: Subject<number> = new Subject();
 	public modalRef: ComponentRef<any>[] = [];
 
-	constructor(protected injector: Injector, private resolver: ComponentFactoryResolver) {
+	constructor(protected injector: Injector) {
 	}
 
 	public RegisterContainerRef(vcRef: ViewContainerRef) {
 		this.viewContainerRef = vcRef;
 	}
 
-	public open<T>(component: Type<T>, parameters?: Object): Observable<ComponentRef<T>> {
-		const componentRef$ = new ReplaySubject();
-		const factory = this.resolver.resolveComponentFactory(component);
-		const componentRef = factory.create(this.injector);
-
+	public openDialog( parameters?: CanDeactivateData): Observable<ComponentRef<ConfirmationModalComponent>> {
 		if (!this.viewContainerRef) {
 			alert('CanDeactivateGuard benötigt cmi-viaduc-modal-service-container Control');
 			return null;
 		}
 
+		const componentRef = this.viewContainerRef.createComponent(ConfirmationModalComponent, {injector: this.injector});
+		componentRef.instance.candeactive = parameters;
+		componentRef.instance.content = parameters.content;
+		componentRef.instance.noButtonText = parameters.noButtonText;
+		componentRef.instance.yesButtonText = parameters.yesButtonText;
+		this.open(componentRef);
+	}
+
+	public openMessage( parameters?: CanDeactivateData) : Observable<ComponentRef<ConfirmationModalComponent>> {
+		if (!this.viewContainerRef) {
+			alert('CanDeactivateGuard benötigt cmi-viaduc-modal-service-container Control');
+			return null;
+		}
+
+		const componentRef = this.viewContainerRef.createComponent(BasicModalComponent, {injector: this.injector});
+		componentRef.instance.candeactive = parameters;
+		componentRef.instance.content = parameters.content;
+		componentRef.instance.closeButtonText = parameters.closeButtonText;
+
+		this.open(componentRef);
+	}
+
+	private open<T>(componentRef: ComponentRef<T>)  {
 		this.viewContainerRef.insert(componentRef.hostView);
-		Object.assign(componentRef.instance, parameters);
+		const componentRef$ = new ReplaySubject();
+		this.viewContainerRef.insert(componentRef.hostView);
 		this.activeInstances++;
 		this.activeInstances$.next(this.activeInstances);
 		componentRef.instance['componentIndex'] = this.activeInstances;
@@ -43,10 +66,9 @@ export class ModalService {
 			this.activeInstances$.next(this.activeInstances);
 			componentRef.destroy();
 
-		this.modalRef.push(componentRef);
-		componentRef$.next(componentRef);
-		componentRef$.complete();
-		return <Observable<ComponentRef<T>>>componentRef$.asObservable();
+			this.modalRef.push(componentRef);
+			componentRef$.next(componentRef);
+			componentRef$.complete();
 		};
 	}
 }

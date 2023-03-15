@@ -5,13 +5,13 @@ import {Utilities as _util} from '../includes/utilities';
 export interface ICookieService {
 	get(key: string): string;
 
-	getObject(key: string): Object;
+	getObject(key: string): unknown;
 
-	getAll(): Object;
+	getAll(): unknown;
 
 	put(key: string, value: string, options?: CookieOptionsArgs): void;
 
-	putObject(key: string, value: Object, options?: CookieOptionsArgs): void;
+	putObject(key: string, value: unknown, options?: CookieOptionsArgs): void;
 
 	remove(key: string, options?: CookieOptionsArgs): void;
 
@@ -35,41 +35,40 @@ export class CookieService implements ICookieService {
 		return (<any>this._cookieReader())[key];
 	}
 
-	public getObject(key: string): Object {
-		let value = this.get(key);
+	public getObject(key: string): unknown {
+		const value = this.get(key);
 		return value ? JSON.parse(value) : value;
 	}
 
-	public getAll(): Object {
+	public getAll(): unknown {
 		return <any>this._cookieReader();
 	}
 
 	public put(key: string, value: string, options?: CookieOptionsArgs) {
-		this._cookieWriter()(key, value, options);
+		this._cookieWriter(key, value, options);
 	}
 
-	public putObject(key: string, value: Object, options?: CookieOptionsArgs) {
+	public putObject(key: string, value: unknown, options?: CookieOptionsArgs) {
 		this.put(key, JSON.stringify(value), options);
 	}
 
 	public remove(key: string, options?: CookieOptionsArgs): void {
-		this._cookieWriter()(key, undefined, options);
+		this._cookieWriter(key, undefined, options);
 	}
 
 	public removeAll(): void {
-		let cookies = this.getAll();
+		const cookies = this.getAll();
 		Object.keys(cookies).forEach(key => {
 			this.remove(key);
 		});
 	}
 
-	private _cookieReader(): Object {
+	private _cookieReader(): unknown {
 		let lastCookies = {};
 		let lastCookieString = '';
-		let that = this;
 
 		let cookieArray: string[], cookie: string, i: number, index: number, name: string;
-		let currentCookieString = this.cookieString;
+		const currentCookieString = this.cookieString;
 		if (currentCookieString !== lastCookieString) {
 			lastCookieString = currentCookieString;
 			cookieArray = lastCookieString.split('; ');
@@ -78,12 +77,12 @@ export class CookieService implements ICookieService {
 				cookie = cookieArray[i];
 				index = cookie.indexOf('=');
 				if (index > 0) {  // ignore nameless cookies
-					name = that._safeDecodeURIComponent(cookie.substring(0, index));
+					name = this._safeDecodeURIComponent(cookie.substring(0, index));
 					// the first value that is seen for a cookie is the most
 					// specific one.  values for the same cookie name that
 					// follow are for less specific paths.
 					if (_util.isEmpty((<any>lastCookies)[name])) {
-						(<any>lastCookies)[name] = that._safeDecodeURIComponent(cookie.substring(index + 1));
+						(<any>lastCookies)[name] = this._safeDecodeURIComponent(cookie.substring(index + 1));
 					}
 				}
 			}
@@ -91,12 +90,8 @@ export class CookieService implements ICookieService {
 		return lastCookies;
 	}
 
-	private _cookieWriter() {
-		let that = this;
-
-		return function (name: string, value: string, options?: CookieOptionsArgs) {
-			that.cookieString = that._buildCookieString(name, value, options);
-		};
+	private _cookieWriter(name: string, value: string, options: CookieOptionsArgs) {
+		document.cookie = this._buildCookieString(name, value, options);
 	}
 
 	private _safeDecodeURIComponent(str: string) {
@@ -107,11 +102,11 @@ export class CookieService implements ICookieService {
 		}
 	}
 
-	private _buildCookieString(name: string, value: string, options?: CookieOptionsArgs): string {
-		let cookiePath = '/';
+	private _buildCookieString(name: string, value: string, options: CookieOptionsArgs): string {
+		const cookiePath = '/';
 		let expires: any;
-		let defaultOpts = this._defaultOptions || new CookieOptions(<CookieOptionsArgs>{path: cookiePath});
-		let opts: CookieOptions = this._mergeOptions(defaultOpts, options);
+		const defaultOpts = this._defaultOptions || new CookieOptions(<CookieOptionsArgs>{path: cookiePath});
+		const opts: CookieOptions = this._mergeOptions(defaultOpts, options);
 		expires = opts.expires;
 		if (_util.isEmpty(value)) {
 			expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
@@ -131,15 +126,16 @@ export class CookieService implements ICookieService {
 		// - 300 cookies
 		// - 20 cookies per unique domain
 		// - 4096 bytes per cookie
-		let cookieLength = str.length + 1;
+		const cookieLength = str.length + 1;
 		if (cookieLength > 4096) {
+			// eslint-disable-next-line
 			console.warn(`Cookie \'${name}\' possibly not set or overflowed because it was too large (${cookieLength} > 4096 bytes)!`);
 		}
 		return str;
 	}
 
 	private _mergeOptions(defaultOpts: CookieOptions, providedOpts?: CookieOptionsArgs): CookieOptions {
-		let newOpts = defaultOpts;
+		const newOpts = defaultOpts;
 		if (_util.isDefined(providedOpts)) {
 			return newOpts.merge(new CookieOptions(providedOpts));
 		}

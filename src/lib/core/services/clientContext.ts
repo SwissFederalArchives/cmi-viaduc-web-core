@@ -1,13 +1,10 @@
 import {DEFAULT_LANGUAGE} from '../model/translations';
 import {ClientModel} from './clientModel';
 import {Injectable} from '@angular/core';
-import * as moment_ from 'moment';
+import moment from 'moment';
 import {Session} from '../model/session';
-import {Utilities as _util} from '../includes/utilities';
 import * as wjCore from '@grapecity/wijmo';
 import {SearchState} from '../model/searchState';
-
-const moment = moment_;
 
 @Injectable()
 export class ClientContext {
@@ -53,12 +50,12 @@ export class ClientContext {
 			language = 'de-CH';
 		}
 
-		let node = document.createElement('script');
+		const node = document.createElement('script');
 		node.src = `client/wijmo.culture.${language}.js`;
 		node.type = 'text/javascript';
 		node.async = true;
 
-		let children = document.getElementsByTagName('head')[0].childNodes;
+		const children = document.getElementsByTagName('head')[0].childNodes;
 		for (let i = 0; i < children.length; i++) {
 			if (children[i] && children[i]['src'] && children[i]['src'].indexOf('wijmo.culture') > 0) {
 				document.getElementsByTagName('head')[0].removeChild(children[i]);

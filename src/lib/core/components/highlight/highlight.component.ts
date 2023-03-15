@@ -12,18 +12,16 @@ export class HighlightComponent {
 	@Input()
 	public text: string;
 
-	public constructor() {
-	}
 	public getInnerHTML(): string {
 		if (this.text && this.highlight) {
-			let position = this.text.toLowerCase().indexOf(this.highlight.toLowerCase());
+			const position = this.text.toLowerCase().indexOf(this.highlight.toLowerCase());
 			if (position !== -1) {
-				let innerHTML: string = '',
-					replaceString = this.text.substr(position, this.highlight.length),
-					split = this.text.split(replaceString),
-					last = split.pop();
+				let innerHTML = '';
+				const replaceString = this.text.substr(position, this.highlight.length);
+				const split = this.text.split(replaceString);
+				const last = split.pop();
 
-				for (let s of split) {
+				for (const s of split) {
 					innerHTML += s;
 					innerHTML += '<ins>' + replaceString + '</ins>';
 				}

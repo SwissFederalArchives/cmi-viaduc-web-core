@@ -9,14 +9,14 @@ export class AdvancedSearchGroup implements SearchGroup {
 	public id: number;
 
 	public changeField(field: AdvancedSearchField): void {
-		let index = this.searchFields.map(f => f.id).indexOf(field.id);
+		const index = this.searchFields.map(f => f.id).indexOf(field.id);
 		if (index > -1) {
 			this.searchFields[index] = field;
 		}
 	}
 
 	public deleteField(field: AdvancedSearchField): void {
-		let index = this.searchFields.indexOf(field, 0);
+		const index = this.searchFields.indexOf(field, 0);
 		if (index > -1) {
 			this.searchFields.splice(index, 1);
 		}

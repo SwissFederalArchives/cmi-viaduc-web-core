@@ -55,21 +55,17 @@ export class EntityDecoratorService {
 				case 'division':
 				case 'sezione principale':
 				case 'main departments':
-
 				case 'beständeserie':
 				case 'série des fonds':
 				case 'serie di fondi':
 				case 'fonds series':
-
 				case 'akzession':
 				case 'versement':
 				case 'accessione':
 				case 'accessions':
-
 				case 'archiv':
 				case 'archives':
 				case 'archivio':
-
 				case 'bestand':
 				case 'fonds':
 				case 'fondo':
@@ -123,9 +119,9 @@ export class EntityDecoratorService {
 		if (!response) {
 			return response;
 		}
-		for (let key in response) {
+		for (const key in response) {
 			if (response.hasOwnProperty(key)) {
-				let result = <EntityResult>response[key];
+				const result = <EntityResult>response[key];
 				this.decorateEntities(result.items, options);
 			}
 		}

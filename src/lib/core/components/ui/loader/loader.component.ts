@@ -9,7 +9,4 @@ export class LoaderComponent {
 
 	@Input()
 	public options: any = {};
-
-	constructor() {
-	}
 }

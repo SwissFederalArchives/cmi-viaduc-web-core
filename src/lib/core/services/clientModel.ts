@@ -14,7 +14,7 @@ export class ClientModel {
 
 	public updateVersion(version: ClientVersion, update: any): ClientVersion {
 		if (_util.isString(update)) {
-			let m = update.match(/^(?:(\w+)\W)(?:(\w+)\W)(?:(\w+))\W?(\w+)?$/);
+			const m = update.match(/^(?:(\w+)\W)(?:(\w+)\W)(?:(\w+))\W?(\w+)?$/);
 			if (m !== null && m.length >= 4) {
 				version = <ClientVersion>{
 					...version,

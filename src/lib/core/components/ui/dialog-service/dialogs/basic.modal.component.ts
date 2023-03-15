@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalBase } from '../modal/modal.base';
+import {CanDeactivateData} from '../../../../model';
 
 @Component({
 	selector: 'cmi-viaduc-basic-modal',
@@ -23,8 +24,10 @@ export class BasicModalComponent extends ModalBase {
 	public title: string;
 	public content: string;
 	public closeButtonText: string;
+	public candeactive: CanDeactivateData
 
 	public onClose(): void {
+		this.candeactive.result.emit(false);
 		this.closeModal();
 	}
 }

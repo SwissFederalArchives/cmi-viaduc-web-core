@@ -16,12 +16,12 @@ export class StammdatenService {
 	}
 
 	public getReasons(): Observable<Reason[]> {
-		let url = `${this._apiUrl}/GetReasons`;
+		const url = `${this._apiUrl}/GetReasons`;
 		return this._http.get<Reason[]>(url);
 	}
 
 	public getArtDerArbeiten(): Observable<ArtDerArbeit[]> {
-		let url = `${this._apiUrl}/GetArtDerArbeiten`;
+		const url = `${this._apiUrl}/GetArtDerArbeiten`;
 		return this._http.get<ArtDerArbeit[]>(url);
 	}
 

@@ -9,7 +9,4 @@ export class SpinnerComponent {
 
 	@Input()
 	public hint: string;
-
-	constructor() {
-	}
 }

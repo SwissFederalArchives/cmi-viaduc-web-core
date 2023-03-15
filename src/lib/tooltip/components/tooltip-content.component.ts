@@ -28,12 +28,12 @@ export class TooltipContentComponent implements AfterViewInit {
 	public placement: 'top'|'bottom'|'left'|'right' = 'bottom';
 
 	@Input()
-	public animation: boolean = true;
+	public animation = true;
 
-	public top: number = -100000;
-	public left: number = -100000;
-	public isIn: boolean = false;
-	public isFade: boolean = false;
+	public top = -100000;
+	public left = -100000;
+	public isIn = false;
+	public isFade = false;
 
 	constructor(private element: ElementRef,
 		private cdr: ChangeDetectorRef) {
@@ -67,14 +67,14 @@ export class TooltipContentComponent implements AfterViewInit {
 		}
 	}
 
-	private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
-		let positionStrParts = positionStr.split('-');
-		let pos0 = positionStrParts[0];
-		let pos1 = positionStrParts[1] || 'center';
-		let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
-		let targetElWidth = targetEl.offsetWidth;
-		let targetElHeight = targetEl.offsetHeight;
-		let shiftWidth: any = {
+	private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody = false): { top: number, left: number } {
+		const positionStrParts = positionStr.split('-');
+		const pos0 = positionStrParts[0];
+		const pos1 = positionStrParts[1] || 'center';
+		const hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+		const targetElWidth = targetEl.offsetWidth;
+		const targetElHeight = targetEl.offsetHeight;
+		const shiftWidth: any = {
 			center: function (): number {
 				return hostElPos.left + hostElPos.width / 2 - targetElWidth / 2;
 			},
@@ -86,7 +86,7 @@ export class TooltipContentComponent implements AfterViewInit {
 			}
 		};
 
-		let shiftHeight: any = {
+		const shiftHeight: any = {
 			center: function (): number {
 				return hostElPos.top + hostElPos.height / 2 - targetElHeight / 2;
 			},

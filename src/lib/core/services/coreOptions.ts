@@ -17,8 +17,8 @@ export class CoreOptions {
 	constructor() {
 		const config = this.clientConfig = window['viaducclient'] || {};
 
-		let loc = window.location;
-		let port = isNaN(parseInt(loc.port, 10)) ? undefined : parseInt(loc.port, 10);
+		const loc = window.location;
+		const port = isNaN(parseInt(loc.port, 10)) ? undefined : parseInt(loc.port, 10);
 		let baseUrl = '' + loc.protocol + '//' + loc.hostname + (port ? ':' + port : '') + loc.pathname;
 		if (_util.endsWith(baseUrl, '/')) {
 			baseUrl = baseUrl.substring(0, baseUrl.length - 1);
@@ -30,7 +30,7 @@ export class CoreOptions {
 		let settingsUrl = '';
 		let odataUrl = '';
 
-		let api = config['api'];
+		const api = config['api'];
 		if (api) {
 			serverUrl = api.server || serverUrl;
 			publicPort = api.public || publicPort;

@@ -44,7 +44,7 @@ export class PreloadService {
 		this._apiDataUrl = _util.addToString(this._options.serverUrl + this._options.publicPort, '/', 'api/Public');
 	}
 
-	public preload(lang: string, loadModelData: boolean = true): Promise<boolean> {
+	public preload(lang: string, loadModelData = true): Promise<boolean> {
 		this._isPreloading = true;
 		return Promise.all([
 			this._loadTranslations(lang),

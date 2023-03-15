@@ -24,7 +24,7 @@ export class HttpService {
 	}
 
 	public download(url: string): Observable<HttpEvent<any>> {
-		let request = new HttpRequest('GET', url, {responseType: 'blob', reportProgress: true });
+		const request = new HttpRequest('GET', url, {responseType: 'blob', reportProgress: true });
 		return this._http.request(request);
 	}
 
