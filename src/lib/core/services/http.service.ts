@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Utilities as _util} from '../includes/utilities';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, timeout} from 'rxjs';
 
 @Injectable()
 export class HttpService {
@@ -25,7 +25,7 @@ export class HttpService {
 
 	public download(url: string): Observable<HttpEvent<any>> {
 		const request = new HttpRequest('GET', url, {responseType: 'blob', reportProgress: true });
-		return this._http.request(request);
+		return this._http.request(request).pipe(timeout(3600000));
 	}
 
 	public delete<T>(url: string, config?: any): Observable<T> {

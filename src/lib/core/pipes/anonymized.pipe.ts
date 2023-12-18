@@ -1,4 +1,4 @@
-import {PipeTransform, Pipe} from '@angular/core';
+import {Pipe, PipeTransform, SecurityContext} from '@angular/core';
 import {TranslationService} from '../services/translation.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -18,7 +18,9 @@ export class AnonymizedHtmlPipe implements PipeTransform {
 			html =  `<span class=${cssClassName} data-toggle="tooltip" title="${text}" data-container="body">${pattern}</span>`;
 		}
 		if (value) {
-			return this.sanitizer.bypassSecurityTrustHtml(value.split(pattern).join(html));
+			const sanitizedValue = this.sanitizer.sanitize(SecurityContext.HTML, value);
+			const sanitizedPattern = this.sanitizer.sanitize(SecurityContext.HTML, pattern);
+			return this.sanitizer.bypassSecurityTrustHtml(sanitizedValue.split(sanitizedPattern).join(html));
 		}
 		return value;
 	}
