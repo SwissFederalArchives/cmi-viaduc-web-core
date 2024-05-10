@@ -2,9 +2,9 @@
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"outDir": "../out-tsc/lib",
-		"target": "es5",
+		"target": "ES2022",
 		"declarationMap": true,
-		"module": "es2015",
+		"module": "ES2022",
 		"moduleResolution": "node",
 		"declaration": true,
 		"esModuleInterop":  true,
@@ -16,7 +16,7 @@
 		"types": [],
 		"lib": [
 			"dom",
-			"es2018"
+			"ES2022"
 		],
 		"paths": {
 			"jszip": [

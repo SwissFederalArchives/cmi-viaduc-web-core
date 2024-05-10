@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {CanDeactivate} from '@angular/router';
+
 import {ComponentCanDeactivate} from '../model/component-can-deactivate';
 import {ModalService} from '../components/ui/dialog-service/modal/modal.service';
 import {TranslationService} from '../services/translation.service';
 import {CanDeactivateData} from '../model';
 
 @Injectable()
-export class CanDeactivateGuard implements CanDeactivate<ComponentCanDeactivate> {
+export class CanDeactivateGuard  {
 
 	private dialogResult: boolean;
 	private dialogIsClosed: boolean;
