@@ -4,7 +4,7 @@
   "typings": "typings.d.ts",
   "main": "public_api.ts",
   "publishConfig": {
-    "registry": "https://www.myget.org/F/cmiag-nuget/npm/"
+    "registry": "https://www.myget.org/F/akrosag-nuget/npm/"
   },
   "scripts": {
     "build:echo:warning": "echo \"\\033[33mPost-Removing Ivy-Publish-Blocker-Scripts\"",
