@@ -1,3 +1,6 @@
+# Deprecated
+This repository is archived, because the code has moved to the main repo under https://github.com/SwissFederalArchives/cmi-viaduc
+
 # cmi-viaduc-web-core
 - [cmi-viaduc](https://github.com/SwissFederalArchives/cmi-viaduc)
    - **[cmi-viaduc-web-core](https://github.com/SwissFederalArchives/cmi-viaduc-web-core)** :triangular_flag_on_post:
